@@ -1,0 +1,3 @@
+cd calvary
+npm i
+npm run dev

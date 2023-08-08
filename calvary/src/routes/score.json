@@ -1,0 +1,188 @@
+{
+    "색션정의": [
+        "매주 달란트",
+        "특별 달란트",
+        "예배 섬김이"
+    ],
+    "미션": {
+        "type": "select",
+        "option": [
+            {
+                "name": "미션",
+                "class": "btn-light",
+                "score": "0"
+            },
+            {
+                "name": "미션",
+                "class": "btn-primary",
+                "score": "5"
+            }
+        ],
+        "section": "특별 달란트",
+        "sectionNO": 1
+    },
+    "전도": {
+        "type": "select",
+        "option": [
+            {
+                "name": "전도",
+                "class": "btn-light",
+                "score": "0"
+            },
+            {
+                "name": "전도",
+                "class": "btn-primary",
+                "score": "10"
+            }
+        ],
+        "section": "특별 달란트",
+        "sectionNO": 1
+    },
+    "출석": {
+        "type": "select",
+        "option": [
+            {
+                "name": "출석",
+                "class": "btn-light",
+                "score": "0"
+            },
+            {
+                "name": "출석",
+                "class": "btn-primary",
+                "score": "10"
+            }
+        ],
+        "section": "매주 달란트",
+        "sectionNO": 0
+    },
+    "큐티": {
+        "max": 6,
+        "min": 0,
+        "type": "input",
+        "section": "매주 달란트",
+        "sectionNO": 0
+    },
+    "성경필사": {
+        "max": 6,
+        "min": 0,
+        "type": "input",
+        "section": "매주 달란트",
+        "sectionNO": 0
+    },
+    "특새": {
+        "max": 100,
+        "min": 0,
+        "type": "input",
+        "section": "특별 달란트",
+        "sectionNO": 1
+    },
+    "보너스": {
+        "max": 100,
+        "min": 0,
+        "type": "input",
+        "section": "특별 달란트",
+        "sectionNO": 1
+    },
+    "기도위원": {
+        "type": "select",
+        "option": [
+            {
+                "name": "기도위원",
+                "class": "btn-light",
+                "score": "0"
+            },
+            {
+                "name": "기도위원",
+                "class": "btn-primary",
+                "score": "5"
+            }
+        ],
+        "section": "예배섬김이",
+        "sectionNO": 2
+    },
+    "설교노트": {
+        "type": "select",
+        "option": [
+            {
+                "name": "설교노트",
+                "class": "btn-light",
+                "score": "0"
+            },
+            {
+                "name": "설교노트",
+                "class": "btn-primary",
+                "score": "5"
+            }
+        ],
+        "section": "매주 달란트",
+        "sectionNO": 0
+    },
+    "성경지참": {
+        "type": "select",
+        "option": [
+            {
+                "name": "성경지참",
+                "class": "btn-light",
+                "score": "0"
+            },
+            {
+                "name": "성경지참",
+                "class": "btn-primary",
+                "score": "1"
+            }
+        ],
+        "section": "매주 달란트",
+        "sectionNO": 0
+    },
+    "순전지참": {
+        "type": "select",
+        "option": [
+            {
+                "name": "순주지참",
+                "class": "btn-light",
+                "score": "0"
+            },
+            {
+                "name": "순주지참",
+                "class": "btn-primary",
+                "score": "1"
+            }
+        ],
+        "section": "매주 달란트",
+        "sectionNO": 0
+    },
+    "특송위원": {
+        "type": "select",
+        "option": [
+            {
+                "name": "특송위원",
+                "class": "btn-light",
+                "score": "0"
+            },
+            {
+                "name": "특송위원",
+                "class": "btn-primary",
+                "score": "5"
+            }
+        ],
+        "section": "예배섬김이",
+        "sectionNO": 2
+    },
+    "헌금위원": {
+        "type": "select",
+        "option": [
+            {
+                "name": "헌금위원",
+                "class": "btn-light",
+                "score": "0"
+            },
+            {
+                "name": "헌금위원",
+                "class": "btn-primary",
+                "score": "5"
+            }
+        ],
+        "section": "예배섬김이",
+        "sectionNO": 2
+    }
+}

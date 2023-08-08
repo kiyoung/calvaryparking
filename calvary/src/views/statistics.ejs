@@ -1,0 +1,68 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<%-include('./Partials/Header.ejs')%>
+<%-include('./Partials/Navi.ejs')%>
+
+<head>
+  <script>
+    var user = <%- JSON.stringify(user) %>;
+  </script>
+  <style>
+    body {
+      background-color: var(--background-color);
+      color: var(--secondary-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .chart-container {
+      background-color: var(--background-color);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      height: 500px;
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: 30px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .chart-header h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="chart-container">
+    <div class="chart-header">
+      <h1>부서 별 출석 Chart</h1>
+    </div>
+    <canvas id="부별출석합" width="100%" height="100%"></canvas>
+  </div>
+  <div class="chart-container">
+    <div class="chart-header">
+      <h1>학년 별 출석 Chart</h1>
+    </div>
+    <canvas id="학년별출석합" width="100%" height="100%"></canvas>
+  </div>
+  <div class="chart-container">
+    <div class="chart-header">
+      <h1>달란트 분포차트 Chart 2부</h1>
+    </div>
+    <canvas id="달란트분포차트2부" width="100%" height="100%"></canvas>
+  </div>
+  <div class="chart-container">
+    <div class="chart-header">
+      <h1>달란트 분포차트 Chart 3부</h1>
+    </div>
+    <canvas id="달란트분포차트3부" width="100%" height="100%"></canvas>
+  </div>
+</body>
+<script src="/public/js/statistics.js"></script>

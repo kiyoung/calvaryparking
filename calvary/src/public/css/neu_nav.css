@@ -1,0 +1,149 @@
+body {
+    min-height: 120vh;
+    background: #ffffff;
+}
+
+.neu-navbar {
+    background: linear-gradient(145deg, #dddefd, #fee0e0);
+    box-shadow:  3px 3px 8px #606060,
+                -3px -3px 8px #ffffff;
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.neu-navbar .neu-navbar-brand {
+    border-radius: 13px;
+    background: #e0e0e0;
+    box-shadow:  3px 3px 6px #afafaf,
+                 -3px -3px 6px #ffffff;
+    font-size:14px;
+    font-weight:700;
+    padding:12px;
+}
+
+.neu-navbar .neu-navbar-brand:hover {
+    border-radius: 13px;
+    background: #e0e0e0;
+    box-shadow: inset 3px 3px 6px #afafaf,
+                inset -3px -3px 6px #ffffff;
+    font-size:14px;
+    padding:12px;
+}
+
+.neu-navbar .neu-nav-item {
+    border-radius:10px;
+    margin-left:10px;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    box-shadow:  3px 3px 5px #828282,
+                -3px -3px 5px #ffffff;
+}
+
+.nav-link
+{
+    background: linear-gradient(145deg, #fbdede, #cac6ff);
+    text-align:center;
+    border-radius: 5px;
+    padding:5px;
+    box-shadow:  3px 3px 5px #585858,
+                -5px -5px 8px #ffffff;
+    width:10%;
+    margin:6px;
+}
+
+.active
+{
+    background: linear-gradient(145deg,#cac6ff, #fbdede);
+    text-align:center;
+    border-radius: 5px;
+    padding:5px;
+    box-shadow: inset 3px 3px 5px #585858,
+                inset -5px -5px 8px #ffffff;
+    width:10%;
+    margin:6px;
+}
+
+
+.neu-navbar .neu-search {
+    background-color: inherit;
+    border-radius: 10px;
+    box-shadow: inset -2px -2px 8px rgba(255,255,255,1),
+                inset -2px -2px 12px rgba(255,255,255,0.5),
+                inset 2px 2px 4px rgba(255,255,255,0.1),
+                inset 2px 2px 8px rgba(0,0,0,0.15);
+}
+
+.neu-navbar .neu-search-button {
+    color: #fff;
+    font-weight:500;
+    background-color: #5a84a2;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    box-shadow: -2px -2px 8px rgba(255,255,255,1),
+                -2px -2px 12px rgba(255,255,255,0.5),
+                inset 2px 2px 4px rgba(255,255,255,0.1),
+                2px 2px 8px rgba(0,0,0,0.15);
+    -webkit-box-shadow: -2px -2px 8px rgba(255,255,255,1),
+                -2px -2px 12px rgba(255,255,255,0.5),
+                inset 2px 2px 4px rgba(255,255,255,0.1),
+                2px 2px 8px rgba(0,0,0,0.15);
+    -moz-box-shadow: -2px -2px 8px rgba(255,255,255,1),
+                -2px -2px 12px rgba(255,255,255,0.5),
+                inset 2px 2px 4px rgba(255,255,255,0.1),
+                2px 2px 8px rgba(0,0,0,0.15);
+}
+
+.neu-navbar .neu-search-button:active {
+    transform: scale(0.98);
+    -webkit-transform: scale(0.98);
+    -ms-transform: scale(0.98);
+    -moz-transform: scale(0.98);
+    box-shadow: inset -2px -2px 2px rgba(255,255,255,1),
+                inset -2px -2px 2px rgba(255,255,255,0.5),
+                inset 1px 1px 2px rgba(255,255,255,0.1),
+                inset 1px 1px 2px rgba(0,0,0,0.15);
+}
+
+.neu-navbar .neu-navbar-toggler {
+    color: #fff;
+    font-weight:500;
+    border-radius: 10px;
+    border-radius: 8px;
+    background: #e0e0e0;
+    box-shadow:  3px 3px 12px #777777,
+                -3px -3px 12px #ffffff;
+}
+
+.neu-navbar .neu-dropdown-menu {
+    background: #E0E5EC;
+    border-radius: 10px;
+    border: none;
+    box-shadow: -2px -2px 8px rgba(255,255,255,1),
+                -2px -2px 12px rgba(255,255,255,0.5),
+                inset 2px 2px 4px rgba(255,255,255,0.1),
+                2px 2px 8px rgba(0,0,0,0.15);
+}
+
+.neu-navbar .neu-dropdown-menu .neu-dropdown-item {
+    margin-top: 2px;
+    border-radius: 10px;
+}
+
+.neu-navbar .neu-dropdown-menu .neu-dropdown-item:hover {
+    background: none;
+    transform: scale(0.98);
+    -webkit-transform: scale(0.98);
+    -ms-transform: scale(0.98);
+    -moz-transform: scale(0.98);
+    box-shadow: inset -2px -2px 2px rgba(255,255,255,1),
+                inset -2px -2px 2px rgba(255,255,255,0.5),
+                inset 1px 1px 2px rgba(255,255,255,0.1),
+                inset 1px 1px 2px rgba(0,0,0,0.15);
+}
+
+@media screen and (max-width: 991px) {
+    .neu-navbar .neu-nav-item {
+        margin-top: 4px;
+    }
+}

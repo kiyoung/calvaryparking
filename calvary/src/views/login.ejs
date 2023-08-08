@@ -1,0 +1,50 @@
+<%-include('./Partials/Header.ejs')%>
+<%-include('./Partials/Navi.ejs')%>
+<script>
+  var referer = '<%= before %>';
+</script>
+
+<head>
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <link href="../public/css/login.css" type="text/css" rel="stylesheet">
+  </link>
+</head>
+<div id ="notice">
+  <br><br><br><br><br><br><br>
+  <center>
+    <h3>출석부 공지</h3>
+    일부 데이터 손실로 아래 도움이 필요합니다.<br>
+    출석부 6월 4일 부터 재입력,<br>
+    아이들 사진 새로 등록,<br>
+    생일, 연락처 등 빠진 부분 체크 및 업데이트<br>
+  </center>
+</div>
+<body>
+  <div class="loginContainer">
+    <div id="kakaologinContainer">
+      <div>
+        <a id="kakao-login-btn"></a>
+      </div>
+      <div>
+        <!--button class="btn btn-outline-primary logout" onclick="unlinkApp()">탈퇴하기</button-->
+      </div>
+    </div>
+    <div id="metaContainer">
+      <form id="metaForm">
+        최초 가입 시 아래의 정보 입력이 필요합니다.
+        <input type="hidden" id="kakaoid" name="kakaoid">
+        <div class="form-group mt-4">
+          <label for="name">이름</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력해주세요">
+        </div>
+        <div class="form-group mt-4">
+          <label for="phone">전화번호</label>
+          <input type="tel" class="form-control" id="phone" name="phone" placeholder="EX) 010-1234-5678">
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">가입</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+<script src="/public/js/login.js?v=1"></script>

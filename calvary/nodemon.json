@@ -1,0 +1,8 @@
+{
+    "ignore": [
+        "src/public/*",
+        "src/views/*",
+        "src/upload/*"
+    ],
+    "exec": "babel-node src/app.js"
+}
