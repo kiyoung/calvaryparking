@@ -10,10 +10,10 @@ const bodyparser = require("body-parser");
 const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
 
-const privateKey = fs.readFileSync("/etc/letsencrypt/live/calcho.org-0002/privkey.pem");
-const certificate = fs.readFileSync("/etc/letsencrypt/live/calcho.org-0002/cert.pem");
-const ca = fs.readFileSync("/etc/letsencrypt/live/calcho.org-0002/chain.pem");
-const credentials = { key: privateKey, cert: certificate, ca: ca };
+//const privateKey = fs.readFileSync("/etc/letsencrypt/live/calcho.org-0002/privkey.pem");
+//const certificate = fs.readFileSync("/etc/letsencrypt/live/calcho.org-0002/cert.pem");
+//const ca = fs.readFileSync("/etc/letsencrypt/live/calcho.org-0002/chain.pem");
+//const credentials = { key: privateKey, cert: certificate, ca: ca };
 
 let corsOptions = {
   origin: "*",
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 //Session 설정
 const maxAge = 1000 * 60 * 60 * 24;
 const sessionObj = {
-  secret: "CalvaryCho01020304050607080910",
+  secret: "calvaryparking15091oijfwlkjse2",
   resave: false,
   saveUninitialized: true,
   store: new MemoryStore({ checkPeriod: maxAge }),
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//파비콘 제거 
+//파비콘 제거
 function ignoreFavicon(req, res, next) {
   if (req.originalUrl.includes("favicon.ico")) {
     res.status(204).end();
@@ -53,25 +53,10 @@ function ignoreFavicon(req, res, next) {
 }
 app.use(ignoreFavicon);
 
-//public 폴더 설정 
-app.use('/.well-known', express.static(__dirname + '/.well-known'));
+//public 폴더 설정
+app.use("/.well-known", express.static(__dirname + "/.well-known"));
 app.use("/public", express.static(__dirname + "/public"));
 app.use("/src/upload", express.static(__dirname + "/upload"));
-
-app.get('/medialist', (req, res) => {
-  const publicPath = path.join(__dirname, 'public');
-  const mediaPath = path.join(publicPath, '/media');
-  console.log(mediaPath);
-  fs.readdir(mediaPath, (err, files) => {
-    if (err) {
-      console.error('파일 목록을 가져오는 중 오류가 발생했습니다:', err);
-      return res.status(500).send('파일 목록을 가져오는 중 오류가 발생했습니다.');
-    }
-    
-    //const mediaFiles = files.filter(file => path.extname(file).toLowerCase() === '.mp4');
-    res.json(files);
-  });
-});
 
 //EJS 엔진
 app.set("views", __dirname + "/views");
@@ -85,11 +70,14 @@ app.use("/vendors", vendorsRouter);
 //라우터 includes
 const routes = require("./routes/pages.js");
 const api = require("./routes/api.js");
-const api_login = require("./routes/api_login.js")
+const api_login = require("./routes/api_login.js");
 const db = require("./routes/db.js");
+const api_parking = require("./routes/api_parking");
+
 app.use(db);
 app.use(routes);
 app.use(api);
+app.use(api_parking);
 app.use(api_login);
 
 // DB Connection 유지.
@@ -97,14 +85,10 @@ setInterval(function () {
   db.connection.query("SELECT 1");
 }, 5000);
 
-
 //Create Server
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
+//const httpsServer = https.createServer(credentials, app);
 
-const handleListen = () => console.log(`Listening on https://calcho.org`);
+const handleListen = () => console.log(`Listening on http://127.0.0.1`);
 httpServer.listen(8080, handleListen);
-https.createServer(credentials, app).listen(443);
-
-
-
+//https.createServer(credentials, app).listen(443);
