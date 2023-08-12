@@ -4,6 +4,10 @@ const inputField = document.querySelector(".inputfield");
 let inputCount = 0,
   finalInput = "";
 
+function init() {
+  startInput();
+}
+
 //Update input
 const updateInputConfig = (element, disabledStatus) => {
   element.disabled = disabledStatus;
@@ -58,18 +62,6 @@ window.addEventListener("keyup", (e) => {
   }
 });
 
-//Start
-const startInput = () => {
-  inputCount = 0;
-  finalInput = "";
-  input.forEach((element) => {
-    element.value = "";
-  });
-  updateInputConfig(inputField.firstElementChild, false);
-};
-
-window.onload = startInput();
-
 function Search(digits) {
   $.post(
     "/search",
@@ -100,7 +92,38 @@ $(document).on("click", ".carnumber", (event) => {
   if (carnumber === undefined || carnumber.length <= 4) {
     carnumber = carnumber4;
   }
+  $("#overlay").fadeIn();
+  $("#modal").addClass("active").fadeIn();
+});
 
+//오버레이 감추기
+$("#overlay, #modal").on("click touchstart", function (event) {
+  if (event.target === this) {
+    $("#overlay").fadeOut();
+    $("#modal").removeClass("active").fadeOut();
+  }
+});
+
+$("#confirmButton").click(function () {
+  var name = $("#name").val();
+  var phoneNumber = $("#phoneNumber").val();
+  var carNumber = $("#carNumber").val();
+  var confirmationMessage =
+    "이름: " +
+    name +
+    "\n전화번호: " +
+    phoneNumber +
+    "\n차량번호: " +
+    carNumber +
+    "\n위의 정보가 맞습니까?";
+  var confirmed = confirm(confirmationMessage);
+  if (confirmed) {
+    $("#overlay").fadeOut();
+    $("#modal").removeClass("active").fadeOut();
+  }
+});
+
+function SendMessage(name, carnumber, cellphone) {
   $.post(
     "/sendmessage",
     {
@@ -112,4 +135,17 @@ $(document).on("click", ".carnumber", (event) => {
       console.log(data);
     }
   );
-});
+}
+
+//Start
+const startInput = () => {
+  $(".searchResult").empty();
+  inputCount = 0;
+  finalInput = "";
+  input.forEach((element) => {
+    element.value = "";
+  });
+  updateInputConfig(inputField.firstElementChild, false);
+};
+
+window.onload = startInput();
