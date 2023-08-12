@@ -25,44 +25,49 @@
       </div>
     </div>
   </div>
+  <div class="messageBox"></div>
   <div id="overlay">
 
   </div>
   <div id="modal">
-    <div class="input-group">
-    <label class="input-label" for="name">이름:</label>
-    <input class="input-field" type="text" id="name" placeholder="이름">
+    <form method="post">
+      <input type="hidden" id="no">
+      <div class="input-group">
+        <label class="input-label" for="name">이름:</label>
+        <input class="input-field" type="text" id="name" placeholder="이름 없이 발송 가능">
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="cellphone">전화번호:</label>
+        <input class="input-field" type="text" id="cellphone" placeholder="전화번호 필수" required>
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="car_number_full">차량번호:</label>
+        <input class="input-field" type="text" id="car_number_full" placeholder="차량번호">
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="car_number_4digit">4자리:</label>
+        <input class="input-field" type="text" id="car_number_4digit" placeholder="차량번호4자리 필수" required>
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="car_type">차종</label>
+        <input class="input-field" type="text" id="car_type" placeholder="차종">
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="part">봉사부서</label>
+        <input class="input-field" type="text" id="part" placeholder="봉사부서">
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="regdate">입력일자</label>
+        <input class="input-field" type="text" id="regdate" placeholder="수정/입력 시 자동입력" readonly>
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="note">비고</label>
+        <input class="input-field" type="text" id="note" placeholder="비고">
+      </div>
+      <button id="confirmButton">알림톡발송</button>
+      <button id="saveButton">등록</button>
+      <button id="deleteButton">삭제</button>
   </div>
-  <div class="input-group">
-    <label class="input-label" for="cellphone">전화번호:</label>
-    <input class="input-field" type="text" id="cellphone" placeholder="전화번호">
-  </div>
-  <div class="input-group">
-    <label class="input-label" for="car_number_full">차량번호:</label>
-    <input class="input-field" type="text" id="car_number_full" placeholder="차량번호">
-  </div>
-  <div class="input-group">
-    <label class="input-label" for="car_number_4digit">4자리:</label>
-    <input class="input-field" type="text" id="car_number_4digit" placeholder="차량번호4자리">
-  </div>
-  <div class="input-group">
-    <label class="input-label" for="car_type">차량타입</label>
-    <input class="input-field" type="text" id="car_type" placeholder="차량번호">
-  </div>
-  <div class="input-group">
-    <label class="input-label" for="part">봉사부서</label>
-    <input class="input-field" type="text" id="part" placeholder="봉사부서">
-  </div>
-  <div class="input-group">
-    <label class="input-label" for="regdate">입력일자</label>
-    <input class="input-field" type="text" id="regdate" placeholder="수정/입력 시 자동입력" readonly>
-  </div>
-  <div class="input-group">
-    <label class="input-label" for="note">비고</label>
-    <input class="input-field" type="text" id="note" placeholder="비고">
-  </div>
-    <button id="confirmButton">알림톡발송</button>
-    <button id="saveButton">수정</button>
-  </div>
+  </form>
 </body>
 <script src="/public/js/search.js?v=2"></script>

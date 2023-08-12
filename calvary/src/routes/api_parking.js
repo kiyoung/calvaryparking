@@ -91,4 +91,39 @@ api_parking.post("/search", (req, res) => {
   });
 });
 
+api_parking.post("/delete", (req, res) => {
+  var no = req.body.no;
+  var query = `DELETE FROM parking_members WHERE no=${no};`;
+  console.log(query);
+  db.connection.query(query, (error, rows) => {
+    res.send(rows);
+  });
+});
+
+api_parking.post("/modify", (req, res) => {
+  var data = req.body;
+  if (data.no > 0) {
+    //업데이트인 경우
+    var query = `UPDATE parking_members SET 
+    name='${data.name}', 
+    cellphone='${data.cellphone}', 
+    car_number_full='${data.car_number_full}', 
+    car_number_4digit='${data.car_number_4digit}', 
+    car_type='${data.car_type}', 
+    part='${data.part}', 
+    regdate=now(), 
+    note='${data.note}'
+    WHERE no=${data.no};`;
+  } else {
+    //insert인 경우
+    var query =
+      "INSERT INTO parking_members (`name`, `cellphone`, `car_number_full`, `car_number_4digit`, `car_type`, `part`, `regdate`, `note`) " +
+      `VALUES ('${data.name}', '${data.cellphone}', '${data.car_number_full}', '${data.car_number_4digit}', '${data.car_type}', '${data.part}', now(), '${data.note}');`;
+  }
+  console.log(query);
+  db.connection.query(query, (error, rows) => {
+    res.send(rows);
+  });
+});
+
 module.exports = api_parking;

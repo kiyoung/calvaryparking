@@ -4,6 +4,7 @@ const inputField = document.querySelector(".inputfield");
 let inputCount = 0,
   finalInput = "";
 
+var isModal = false;
 function init() {
   startInput();
 }
@@ -18,9 +19,12 @@ const updateInputConfig = (element, disabledStatus) => {
   }
 };
 
+var last;
+
 input.forEach((element) => {
   element.addEventListener("keyup", (e) => {
     e.target.value = e.target.value.replace(/[^0-9]/g, "");
+    last = e.target;
     let { value } = e.target;
 
     if (value.length == 1) {
@@ -53,7 +57,7 @@ input.forEach((element) => {
 
 window.addEventListener("keyup", (e) => {
   if (inputCount > 3) {
-    if (e.key == "Backspace") {
+    if (e.key == "Backspace" && isModal === false) {
       finalInput = finalInput.substring(0, finalInput.length - 1);
       updateInputConfig(inputField.lastElementChild, false);
       inputField.lastElementChild.value = "";
@@ -98,22 +102,25 @@ $(document).on("change", ".input-field", (event) => {
 });
 
 $(document).on("click", ".addnew", (event) => {
+  $("#no").val("");
   $("#name").val("");
   $("#cellphone").val("");
-  $("#car_number_full").val("");
-  $("#car_number_4digit").val("");
+  $("#car_number_full").val(finalInput);
+  $("#car_number_4digit").val(finalInput);
   $("#car_type").val("");
   $("#part").val("");
   $("#regdate").val("");
   $("#note").val("");
   $("#overlay").fadeIn();
   $("#modal").addClass("active").fadeIn();
+  isModal = true;
   $("#saveButton").text("등록");
 });
 
 $(document).on("click", ".carnumber", (event) => {
   var no = event.target.dataset.no;
   var data = searchResults[no];
+  $("#no").val(no);
   $("#name").val(data.name);
   $("#cellphone").val(data.cellphone);
   $("#car_number_full").val(data.car_number_full);
@@ -124,18 +131,42 @@ $(document).on("click", ".carnumber", (event) => {
   $("#note").val(data.note);
   $("#overlay").fadeIn();
   $("#modal").addClass("active").fadeIn();
+  isModal = true;
   $("#saveButton").text("수정");
+  $("#deleteButton").show();
+});
+
+$(document).on("click", "#deleteButton", (event) => {
+  event.preventDefault();
+  var no = $("#no").val();
+  $.post(
+    "/delete",
+    {
+      no: no,
+    },
+    (data) => {
+      showToast("정보를 삭제했습니다.", "greenflash");
+      $("#saveButton").text("재등록");
+      $("#no").val("");
+      $(`.carnumber[data-no='${no}']`).each(function () {
+        $(this).remove();
+      });
+    }
+  );
 });
 
 //오버레이 감추기
-$("#overlay, #modal").on("click touchstart", function (event) {
+$("#overlay").on("click touchstart", function (event) {
   if (event.target === this) {
     $("#overlay").fadeOut();
     $("#modal").removeClass("active").fadeOut();
+    isModal = false;
   }
 });
 
-$("#confirmButton").click(function () {
+//발송 버튼
+$("#confirmButton").click(function (event) {
+  event.preventDefault();
   var name = $("#name").val();
   var cellphone = $("#cellphone").val();
   var car_number_full = $("#car_number_full").val();
@@ -150,20 +181,103 @@ $("#confirmButton").click(function () {
     carnumber = car_number_4digit;
   }
 
-  var confirmationMessage =
-    "이름: " +
-    name +
-    "\n전화번호: " +
-    cellphone +
-    "\n차량번호: " +
-    carnumber +
-    "\n위의 정보가 맞습니까?";
-  var confirmed = confirm(confirmationMessage);
-  if (confirmed) {
-    $("#overlay").fadeOut();
-    $("#modal").removeClass("active").fadeOut();
-	SendMessage(name, carnumber, cellphone);
+  cellphone = cellphone.replace(/-/g, "");
+  var regex = /^\d{10,11}$/;
+  if (regex.test(cellphone) === false) {
+    showToast("휴대폰번호를 확인해주세요", "redflash");
+    return;
   }
+  if (carnumber.length < 4) {
+    showToast("차량번호를 확인해주세요", "redflash");
+    return;
+  }
+
+  $("#overlay").fadeOut();
+  $("#modal").removeClass("active").fadeOut();
+  isModal = false;
+  SendMessage(name, carnumber, cellphone);
+});
+
+//발송 버튼
+$("#saveButton").click(function (event) {
+  event.preventDefault();
+  var no = $("#no").val();
+  var name = $("#name").val();
+  var cellphone = $("#cellphone").val();
+  var car_number_full = $("#car_number_full").val();
+  var car_number_4digit = $("#car_number_4digit").val();
+  var car_type = $("#car_type").val();
+  var part = $("#part").val();
+  var regdate = $("#regdate").val();
+  var note = $("#note").val();
+
+  var carnumber = car_number_full;
+  if (car_number_full.length <= 4) {
+    carnumber = car_number_4digit;
+  }
+
+  cellphone = cellphone.replace(/-/g, "");
+  var regex = /^\d{10,11}$/;
+  if (regex.test(cellphone) === false) {
+    showToast("휴대폰번호를 확인해주세요", "");
+    return;
+  }
+  if (carnumber.length < 4) {
+    showToast("차량번호를 확인해주세요");
+    return;
+  }
+
+  $.post(
+    "/modify",
+    {
+      no: no,
+      name: name,
+      cellphone: cellphone,
+      car_number_full: car_number_full,
+      car_number_4digit: car_number_4digit,
+      car_type: car_type,
+      part: part,
+      regdate: regdate,
+      note: note,
+    },
+    (data) => {
+      var cno = no;
+      if (data.insertId > 0) {
+        cno = data.insertId;
+      }
+      console.log(data);
+      console.log(cno);
+      searchResults[cno] = {};
+      searchResults[cno].no = cno;
+      searchResults[cno].name = name;
+      searchResults[cno].cellphone = cellphone;
+      searchResults[cno].car_number_full = car_number_full;
+      searchResults[cno].car_number_4digit = car_number_4digit;
+      searchResults[cno].car_type = car_type;
+      searchResults[cno].part = part;
+      searchResults[cno].regdate = regdate;
+      searchResults[cno].note = note;
+      if (data.insertId === 0) {
+        showToast("정보를 수정했습니다.", "greenflash");
+      } else {
+        showToast("정보를 등록했습니다.", "greenflash");
+        $("#no").val(data.insertId);
+        $("#saveButton").text("수정");
+
+        var carnumber = car_number_full;
+        if (car_number_full.length <= 4) {
+          carnumber = car_number_4digit;
+        }
+        $(".searchResult").append(
+          `
+            <div class='row'>
+              <button class="carnumber" data-no="${data.insertId}">${name}/${carnumber}</button>
+            </div>
+          `
+        );
+      }
+    }
+  );
 });
 
 function SendMessage(name, carnumber, cellphone) {
@@ -175,9 +289,20 @@ function SendMessage(name, carnumber, cellphone) {
       cellphone: cellphone,
     },
     (data) => {
-      console.log(data);
+      showToast("알림톡을 발송했습니다.", "greenflash");
     }
   );
+}
+
+function showToast(message, color) {
+  console.log(color);
+  $(".messageBox").text(message);
+  $(".messageBox").addClass(color);
+
+  setTimeout(function () {
+    $(".messageBox").removeClass(color);
+    $(".messageBox").text("");
+  }, 3000);
 }
 
 //Start

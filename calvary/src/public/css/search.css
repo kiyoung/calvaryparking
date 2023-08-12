@@ -166,7 +166,7 @@ input[type="number"]::-webkit-inner-spin-button {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  z-index: 100;
   backdrop-filter: blur(5px);
   transition: backdrop-filter 0.3s, background-color 0.3s;
 }
@@ -176,7 +176,7 @@ input[type="number"]::-webkit-inner-spin-button {
   max-width: 38em;
   display: none;
   position: fixed;
-  top: 54%;
+  top: 43%;
   left: 50%;
   width: 90vw;
   transform: translate(-50%, -50%);
@@ -196,7 +196,7 @@ input[type="number"]::-webkit-inner-spin-button {
 /* 입력 요소 스타일 */
 input[type="text"] {
   width: 100%;
-  padding: 8px;
+  padding: 4px;
   margin-bottom: 10px;
   box-sizing: border-box;
   border: 1px solid #ddd;
@@ -213,11 +213,28 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+#saveButton {
+  display: inline-block;
+  padding: 8px 15px;
+  border: none;
+  background-color: #5f0ef5;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#deleteButton {
+  display: none;
+  padding: 8px 15px;
+  border: none;
+  background-color: #ff0000;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 /* 표시 영역 너비 조정 */
 .input-group {
   display: flex;
-  margin-bottom: 10px;
 }
 
 .input-label {
@@ -232,4 +249,52 @@ button {
   flex: 2;
   padding-left: 10px;
   font-size: 20px;
+}
+
+.messageBox {
+  width: 80vw;
+  max-width: 40em;
+  background-color: #ffffff;
+  padding: 2em 2em;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  bottom: 0px;
+  height: 100px;
+  left: 50%;
+  margin-top: 16px;
+  border-radius: 0.8em;
+  box-shadow: 0 45px 60px rgba(30, 22, 1, 0.3);
+  z-index: 99;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 18px;
+  z-index: 102;
+}
+
+.greenflash {
+  animation: greenFlashAnimation 3s infinite;
+}
+
+@keyframes greenFlashAnimation {
+  0%,
+  100% {
+    background-color: #ffffff;
+  }
+  50% {
+    background-color: #13faa1;
+  }
+}
+
+.redflash {
+  animation: redFlashAnimation 3s infinite;
+}
+
+@keyframes redFlashAnimation {
+  0%,
+  100% {
+    background-color: #ffffff;
+  }
+  50% {
+    background-color: #f3804b;
+  }
 }
