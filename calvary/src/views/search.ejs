@@ -18,8 +18,12 @@
       <button id="submit" onclick="init();">초기화</button>
     </div>
   </div>
-  <div class="searchResult">
-
+  <div>
+    <div class="searchResult">
+      <div class='row'>
+        <button class="addnew">신규등록</button>
+      </div>
+    </div>
   </div>
   <div id="overlay">
 
@@ -30,8 +34,8 @@
     <input class="input-field" type="text" id="name" placeholder="이름">
   </div>
   <div class="input-group">
-    <label class="input-label" for="phoneNumber">전화번호:</label>
-    <input class="input-field" type="text" id="phoneNumber" placeholder="전화번호">
+    <label class="input-label" for="cellphone">전화번호:</label>
+    <input class="input-field" type="text" id="cellphone" placeholder="전화번호">
   </div>
   <div class="input-group">
     <label class="input-label" for="car_number_full">차량번호:</label>
@@ -51,13 +55,14 @@
   </div>
   <div class="input-group">
     <label class="input-label" for="regdate">입력일자</label>
-    <input class="input-field" type="text" id="regdate" placeholder="입력일자">
+    <input class="input-field" type="text" id="regdate" placeholder="수정/입력 시 자동입력" readonly>
   </div>
   <div class="input-group">
     <label class="input-label" for="note">비고</label>
     <input class="input-field" type="text" id="note" placeholder="비고">
   </div>
-    <button id="confirmButton">확인</button>
+    <button id="confirmButton">알림톡발송</button>
+    <button id="saveButton">수정</button>
   </div>
 </body>
 <script src="/public/js/search.js?v=2"></script>

@@ -58,9 +58,12 @@ window.addEventListener("keyup", (e) => {
       updateInputConfig(inputField.lastElementChild, false);
       inputField.lastElementChild.value = "";
       inputCount -= 1;
+      $(".searchResult").find(".carnumber").remove();
     }
   }
 });
+
+var searchResults = [];
 
 function Search(digits) {
   $.post(
@@ -70,11 +73,18 @@ function Search(digits) {
     },
     (data) => {
       data.forEach((row) => {
-        console.log(row);
+        searchResults[row.no] = row;
+        var carnumber = row.car_number_full;
+        if (
+          row.car_number_full === undefined ||
+          row.car_number_full.length <= 4
+        ) {
+          carnumber = row.car_number_4digit;
+        }
         $(".searchResult").append(
           `
             <div class='row'>
-              <button class="carnumber" data-carnumber="${row.car_number_full}" data-carnumber4="${row.car_number_4digit}" data-name="${row.name}" data-cellphone="${row.cellphone}">${row.car_number_full}</button>
+              <button class="carnumber" data-no="${row.no}">${row.name}/${carnumber}</button>
             </div>
           `
         );
@@ -83,17 +93,38 @@ function Search(digits) {
   );
 }
 
-$(document).on("click", ".carnumber", (event) => {
-  var carnumber = event.target.dataset.carnumber;
-  var carnumber4 = event.target.dataset.carnumber4;
-  var name = event.target.dataset.name;
-  var cellphone = event.target.dataset.cellphone;
+$(document).on("change", ".input-field", (event) => {
+  console.log(event);
+});
 
-  if (carnumber === undefined || carnumber.length <= 4) {
-    carnumber = carnumber4;
-  }
+$(document).on("click", ".addnew", (event) => {
+  $("#name").val("");
+  $("#cellphone").val("");
+  $("#car_number_full").val("");
+  $("#car_number_4digit").val("");
+  $("#car_type").val("");
+  $("#part").val("");
+  $("#regdate").val("");
+  $("#note").val("");
   $("#overlay").fadeIn();
   $("#modal").addClass("active").fadeIn();
+  $("#saveButton").text("등록");
+});
+
+$(document).on("click", ".carnumber", (event) => {
+  var no = event.target.dataset.no;
+  var data = searchResults[no];
+  $("#name").val(data.name);
+  $("#cellphone").val(data.cellphone);
+  $("#car_number_full").val(data.car_number_full);
+  $("#car_number_4digit").val(data.car_number_4digit);
+  $("#car_type").val(data.car_type);
+  $("#part").val(data.part);
+  $("#regdate").val(data.regdate);
+  $("#note").val(data.note);
+  $("#overlay").fadeIn();
+  $("#modal").addClass("active").fadeIn();
+  $("#saveButton").text("수정");
 });
 
 //오버레이 감추기
@@ -106,8 +137,19 @@ $("#overlay, #modal").on("click touchstart", function (event) {
 
 $("#confirmButton").click(function () {
   var name = $("#name").val();
-  var phoneNumber = $("#phoneNumber").val();
-  var carNumber = $("#carNumber").val();
+  var cellphone = $("#cellphone").val();
+  var car_number_full = $("#car_number_full").val();
+  var car_number_4digit = $("#car_number_4digit").val();
+  var car_type = $("#car_type").val();
+  var part = $("#part").val();
+  var regdate = $("#regdate").val();
+  var note = $("#note").val();
+
+  var carnumber = car_number_full;
+  if (car_number_full.length <= 4) {
+    carnumber = car_number_4digit;
+  }
+
   var confirmationMessage =
     "이름: " +
     name +
@@ -139,7 +181,7 @@ function SendMessage(name, carnumber, cellphone) {
 
 //Start
 const startInput = () => {
-  $(".searchResult").empty();
+  $(".searchResult").find(".carnumber").remove();
   inputCount = 0;
   finalInput = "";
   input.forEach((element) => {

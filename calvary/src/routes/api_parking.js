@@ -84,7 +84,7 @@ api_parking.post("/sendmessage", async (req, res) => {
 
 api_parking.post("/search", (req, res) => {
   var digits = req.body.digits;
-  var query = `select * from parking_members where car_number_4digit = '${digits}'`;
+  var query = `select * from parking_members p WHERE p.car_number_4digit = '${digits}' AND p.name <> "미등록" AND p.name IS NOT NULL AND p.cellphone IS NOT NULL AND p.cellphone <>"" ORDER BY regdate desc`;
   console.log(query);
   db.connection.query(query, (error, rows) => {
     res.send(rows);
