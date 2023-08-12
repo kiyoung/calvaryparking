@@ -89,6 +89,6 @@ setInterval(function () {
 const httpServer = http.createServer(app);
 //const httpsServer = https.createServer(credentials, app);
 
-const handleListen = () => console.log(`Listening on http://127.0.0.1`);
+const handleListen = () => console.log(`Listening on http://127.0.0.1:8080`);
 httpServer.listen(8080, handleListen);
 //https.createServer(credentials, app).listen(443);

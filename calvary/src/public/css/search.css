@@ -1,0 +1,125 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  background: rgb(28, 134, 255);
+}
+
+.container {
+  width: 80vw;
+  max-width: 38em;
+  background-color: #ffffff;
+  padding: 4em 2em;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 30%;
+  left: 50%;
+  border-radius: 0.8em;
+  box-shadow: 0 45px 60px rgba(30, 22, 1, 0.3);
+}
+
+.searchResult {
+  width: 80vw;
+  max-width: 40em;
+  background-color: #ffffff;
+  padding: 2em 2em;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 60%;
+  left: 50%;
+  margin-top: 16px;
+  border-radius: 0.8em;
+  box-shadow: 0 45px 60px rgba(30, 22, 1, 0.3);
+}
+
+.inputfield {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.input {
+  width: 15vw;
+  height: 15vw;
+  max-height: 3em;
+  max-width: 3em;
+  border: 2px solid #dad9df;
+  outline: none;
+  text-align: center;
+  font-size: 1.5em;
+  border-radius: 0.3em;
+  background-color: #ffffff;
+  outline: none;
+  /*Hide number field arrows*/
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input:disabled {
+  color: #89888b;
+}
+.input:focus {
+  border: 3px solid #ffb800;
+}
+
+#submit {
+  background-color: #044ecf;
+  border: none;
+  outline: none;
+  font-size: 1.2em;
+  padding: 0.8em 2em;
+  color: #ffffff;
+  border-radius: 0.1em;
+  margin: 1em auto 0 auto;
+  cursor: pointer;
+}
+
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+
+.name {
+  display: inline-block;
+  max-width: 100%;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background-color: #151818;
+  color: #fff;
+  font-size: 32px;
+  margin: 4px;
+}
+
+.phone {
+  display: inline-block;
+  max-width: 100%;
+  padding: 2px 4px;
+  border-radius: 999px;
+  background-color: #ffcc5d;
+  color: #fff;
+  font-size: 16px;
+  margin: 2px;
+}
+
+.carnumber {
+  display: inline-block;
+  max-width: 100%;
+  text-align: center;
+  padding: 2px 4px;
+  border-radius: 999px;
+  background-color: #0a1af7;
+  color: #fff;
+  font-size: 32px;
+  margin: 2px;
+  margin-top: 8px;
+  box-shadow: 0 8px 16px rgba(30, 22, 1, 0.7);
+}
