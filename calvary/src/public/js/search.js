@@ -154,14 +154,15 @@ $("#confirmButton").click(function () {
     "이름: " +
     name +
     "\n전화번호: " +
-    phoneNumber +
+    cellphone +
     "\n차량번호: " +
-    carNumber +
+    carnumber +
     "\n위의 정보가 맞습니까?";
   var confirmed = confirm(confirmationMessage);
   if (confirmed) {
     $("#overlay").fadeOut();
     $("#modal").removeClass("active").fadeOut();
+	SendMessage(name, carnumber, cellphone);
   }
 });
 
