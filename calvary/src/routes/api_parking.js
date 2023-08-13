@@ -21,6 +21,7 @@ api_parking.post("/sendmessage", async (req, res) => {
   const url = `https://sens.apigw.ntruss.com/alimtalk/v2/services/${uri}/messages`;
   const url2 = `/alimtalk/v2/services/${uri}/messages`;
 
+  var no = req.body.no;
   var name = req.body.name;
   var carnumber = req.body.carnumber;
   var receiver = req.body.cellphone;
@@ -47,9 +48,9 @@ api_parking.post("/sendmessage", async (req, res) => {
   const hash = hmac.finalize();
   const signature = hash.toString(CryptoJS.enc.Base64);
   var response = "";
-  await request(
+  request(
     {
-      method: method,
+      method: "POST",
       json: true,
       uri: url,
       headers: {
@@ -75,16 +76,19 @@ api_parking.post("/sendmessage", async (req, res) => {
         ],
       },
     },
-    function (err, res, html) {
-      response = res;
+    function (err, response, html) {
+      var query =
+        "INSERT INTO parking_log (`member_no`,`cellphone`, `date`, `sendtype`) " +
+        `VALUES ('${no}','${receiver}',now(), '알림톡');`;
+      db.connection.query(query, (error, rows) => {});
+      res.send(response);
     }
   );
-  res.send(response);
 });
 
 api_parking.post("/search", (req, res) => {
   var digits = req.body.digits;
-  var query = `select * from parking_members p WHERE p.car_number_4digit = '${digits}' AND p.name <> "미등록" AND p.name IS NOT NULL AND p.cellphone IS NOT NULL AND p.cellphone <>"" ORDER BY regdate desc`;
+  var query = `select * from parking_members p WHERE p.car_number_4digit = '${digits}' ORDER BY regdate desc`;
   console.log(query);
   db.connection.query(query, (error, rows) => {
     res.send(rows);

@@ -167,6 +167,7 @@ $("#overlay").on("click touchstart", function (event) {
 //발송 버튼
 $("#confirmButton").click(function (event) {
   event.preventDefault();
+  var no = $("#no").val();
   var name = $("#name").val();
   var cellphone = $("#cellphone").val();
   var car_number_full = $("#car_number_full").val();
@@ -195,7 +196,7 @@ $("#confirmButton").click(function (event) {
   $("#overlay").fadeOut();
   $("#modal").removeClass("active").fadeOut();
   isModal = false;
-  SendMessage(name, carnumber, cellphone);
+  SendMessage(no, name, carnumber, cellphone);
 });
 
 //발송 버튼
@@ -280,15 +281,17 @@ $("#saveButton").click(function (event) {
   );
 });
 
-function SendMessage(name, carnumber, cellphone) {
+function SendMessage(no, name, carnumber, cellphone) {
   $.post(
     "/sendmessage",
     {
+      no: no,
       name: name,
       carnumber: carnumber,
       cellphone: cellphone,
     },
     (data) => {
+      console.log(data);
       showToast("알림톡을 발송했습니다.", "greenflash");
     }
   );
