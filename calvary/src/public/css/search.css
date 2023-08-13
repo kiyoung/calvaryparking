@@ -12,10 +12,10 @@ body {
   width: 80vw;
   max-width: 40em;
   background-color: #ffffff;
-  padding: 4em 2em;
+  padding: 2em 1em;
   position: absolute;
   transform: translate(-50%, -50%);
-  top: 30%;
+  top: 15%;
   left: 50%;
   border-radius: 0.8em;
   box-shadow: 0 45px 60px rgba(30, 22, 1, 0.3);
@@ -32,7 +32,7 @@ body {
   padding: 2em 2em;
   position: absolute;
   transform: translate(-50%, -50%);
-  top: 60%;
+  top: 55%;
   left: 50%;
   margin-top: 16px;
   border-radius: 0.8em;
@@ -45,10 +45,10 @@ body {
   justify-content: space-around;
 }
 .input {
-  width: 15vw;
-  height: 15vw;
-  max-height: 4em;
-  max-width: 4em;
+  width: 12vw;
+  height: 12vw;
+  max-height: 3em;
+  max-width: 3em;
   border: 2px solid #dad9df;
   outline: none;
   text-align: center;
@@ -206,7 +206,19 @@ input[type="text"] {
 /* 버튼 스타일 */
 button {
   display: inline-block;
-  padding: 8px 15px;
+  padding: 8px 8px;
+  margin-top: 8px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#init {
+  display: inline-block;
+  padding: 8px 8px;
   border: none;
   background-color: #007bff;
   color: white;
