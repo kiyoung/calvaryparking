@@ -95,12 +95,21 @@ function Search(digits) {
       digits: digits,
     },
     (data) => {
+      if (data.length === 0) {
+        $(".searchResult").append(
+          `
+              <div class='row'>
+                <span class="carnumber">결과가 없습니다</span>
+              </div>
+            `
+        );
+      }
       data.forEach((row) => {
         searchResults[row.no] = row;
         $(".searchResult").append(
           `
             <div class='row'>
-              <button class="carnumber" data-no="${row.no}">${row.name}/${row.car_number_full}${row.car_number_4digit}</button>
+              <button class="carnumber" data-no="${row.no}"><span class='nameplate'>${row.name}</span> ${row.car_number_full}${row.car_number_4digit}</button>
             </div>
           `
         );
@@ -131,6 +140,9 @@ $(document).on("click", ".addnew", (event) => {
 
 $(document).on("click", ".carnumber", (event) => {
   var no = event.target.dataset.no;
+  if (no === undefined) {
+    return;
+  }
   var data = searchResults[no];
   $("#no").val(no);
   $("#name").val(data.name);
@@ -259,8 +271,6 @@ $("#saveButton").click(function (event) {
       if (data.insertId > 0) {
         cno = data.insertId;
       }
-      console.log(data);
-      console.log(cno);
       searchResults[cno] = {};
       searchResults[cno].no = cno;
       searchResults[cno].name = name;
@@ -278,14 +288,12 @@ $("#saveButton").click(function (event) {
         $("#no").val(data.insertId);
         $("#saveButton").text("수정");
 
-        var carnumber = car_number_full;
-        if (car_number_full.length <= 4) {
-          carnumber = car_number_4digit;
-        }
+        var carnumber = car_number_full + car_number_4digit;
+
         $(".searchResult").append(
           `
             <div class='row'>
-              <button class="carnumber" data-no="${data.insertId}">${name}/${carnumber}</button>
+              <button class="carnumber" data-no="${data.insertId}"><span class='nameplate'>${name}</span> ${carnumber}</button>
             </div>
           `
         );

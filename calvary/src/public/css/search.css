@@ -130,7 +130,7 @@ input[type="number"]::-webkit-inner-spin-button {
   text-align: center;
   padding: 4px 8px;
   border-radius: 16px;
-  background-color: rgba(110, 8, 226, 0.9);
+  background-color: rgba(4, 0, 214, 0.9);
   color: #fff;
   font-size: 26px;
   margin: 8px;
@@ -160,7 +160,7 @@ input[type="number"]::-webkit-inner-spin-button {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 8px rgba(30, 22, 1, 0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 1s, box-shadow 1s;
 }
 
 .addnew:hover {
@@ -178,7 +178,7 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
   backdrop-filter: blur(5px);
-  transition: backdrop-filter 0.3s, background-color 0.3s;
+  transition: backdrop-filter 1s, background-color 1s;
 }
 
 /* 뉴모피즘 스타일 모달 */
@@ -186,7 +186,7 @@ input[type="number"]::-webkit-inner-spin-button {
   max-width: 38em;
   display: none;
   position: fixed;
-  top: 43%;
+  top: 45%;
   left: 50%;
   width: 90vw;
   transform: translate(-50%, -50%);
@@ -195,7 +195,7 @@ input[type="number"]::-webkit-inner-spin-button {
   z-index: 2000;
   border-radius: 16px;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.7);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 1s, box-shadow 1s;
 }
 
 #modal.active {
@@ -249,9 +249,18 @@ button {
   box-shadow: 0 4px 17px rgba(30, 22, 1, 1);
 }
 
+#confirmButton {
+  display: inline-block;
+  padding: 12px 18px;
+  border: none;
+  background-color: #0026ff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
 #saveButton {
   display: inline-block;
-  padding: 8px 15px;
+  padding: 12px 18px;
   border: none;
   background-color: #5f0ef5;
   color: white;
@@ -260,7 +269,7 @@ button {
 }
 #deleteButton {
   display: none;
-  padding: 8px 15px;
+  padding: 12px 18px;
   border: none;
   background-color: #ff0000;
   color: white;
@@ -268,11 +277,17 @@ button {
   cursor: pointer;
 }
 #closeButton {
-  padding: 8px 15px;
+  position: absolute;
+  top: 113%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
   border: none;
-  background-color: #ae33ff;
-  color: white;
-  border-radius: 5px;
+  color: #ff0000;
+  font-weight: 1000;
+  background-color: #ffffff;
+  border-radius: 999px;
   cursor: pointer;
 }
 
@@ -349,4 +364,9 @@ button {
     display: block;
     background-color: #f3804b;
   }
+}
+
+.nameplate {
+  font-weight: 700;
+  color: #ffed9f;
 }
