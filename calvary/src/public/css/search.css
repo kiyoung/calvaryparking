@@ -4,21 +4,22 @@
   box-sizing: border-box;
 }
 body {
-  height: 100vh;
   background: rgb(223, 218, 243);
+  height: 400px;
 }
 
 .container {
   width: 80vw;
   max-width: 40em;
+  position: fixed;
   background-color: #ffffff;
   padding: 2em 1em;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 15%;
-  left: 50%;
+  top: 50px;
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
   border-radius: 0.8em;
   box-shadow: 0 45px 60px rgba(30, 22, 1, 0.3);
+  z-index: 96;
 }
 
 .buttonContainer {
@@ -27,14 +28,14 @@ body {
 
 .searchResult {
   width: 80vw;
+  background: white;
+  position: sticky;
   max-width: 40em;
   background-color: #ffffff;
   padding: 2em 2em;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 55%;
-  left: 50%;
-  margin-top: 16px;
+  margin-top: 250px;
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
   border-radius: 0.8em;
   box-shadow: 0 45px 60px rgba(30, 22, 1, 0.3);
 }
@@ -243,6 +244,14 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+#closeButton {
+  padding: 8px 15px;
+  border: none;
+  background-color: #ae33ff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 /* 표시 영역 너비 조정 */
 .input-group {
@@ -267,6 +276,8 @@ button {
   width: 80vw;
   max-width: 40em;
   background-color: #ffffff;
+  opacity: 0;
+  display: none;
   padding: 2em 2em;
   position: fixed;
   transform: translate(-50%, -50%);
@@ -285,6 +296,7 @@ button {
 
 .greenflash {
   animation: greenFlashAnimation 3s infinite;
+  display: block;
 }
 
 @keyframes greenFlashAnimation {
@@ -293,12 +305,15 @@ button {
     background-color: #ffffff;
   }
   50% {
+    opacity: 1;
+    display: block;
     background-color: #13faa1;
   }
 }
 
 .redflash {
   animation: redFlashAnimation 3s infinite;
+  display: block;
 }
 
 @keyframes redFlashAnimation {
@@ -307,6 +322,8 @@ button {
     background-color: #ffffff;
   }
   50% {
+    opacity: 1;
+    display: block;
     background-color: #f3804b;
   }
 }

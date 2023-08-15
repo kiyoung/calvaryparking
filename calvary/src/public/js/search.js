@@ -22,42 +22,61 @@ const updateInputConfig = (element, disabledStatus) => {
 var last;
 
 input.forEach((element) => {
-  element.addEventListener("keyup", (e) => {
-    e.target.value = e.target.value.replace(/[^0-9]/g, "");
-    last = e.target;
-    let { value } = e.target;
-
-    if (value.length == 1) {
-      updateInputConfig(e.target, true);
-      if (inputCount <= 3 && e.key != "Backspace") {
-        finalInput += value;
-        if (inputCount < 3) {
-          updateInputConfig(e.target.nextElementSibling, false);
-        }
-      }
-      inputCount += 1;
-    } else if (value.length == 0 && e.key == "Backspace") {
-      finalInput = finalInput.substring(0, finalInput.length - 1);
-      if (inputCount == 0) {
+  element.addEventListener("keydown", (e) => {
+    e.preventDefault();
+    // keyup 대신 keydown으로 변경
+    if (e.key === "Backspace" && e.target.value.length === 0) {
+      if (inputCount === 0) {
         updateInputConfig(e.target, false);
-        return false;
+        return;
       }
-      updateInputConfig(e.target, true);
-      e.target.previousElementSibling.value = "";
+      finalInput = finalInput.substring(0, finalInput.length - 1);
       updateInputConfig(e.target.previousElementSibling, false);
+      e.target.previousElementSibling.value = "";
       inputCount -= 1;
-    } else if (value.length > 1) {
-      e.target.value = value.split("")[0];
+      $(".searchResult").find(".carnumber").remove();
     }
-    if (inputCount > 3) {
-      Search(finalInput);
+
+    if (e.key.match(/[0-9]/)) {
+      e.target.value = e.key;
+      last = e.target;
+      let value = e.key;
+      if (value.length === 1) {
+        updateInputConfig(e.target, true);
+        if (inputCount <= 3 && e.key !== "Backspace") {
+          finalInput += value;
+          if (inputCount < 3) {
+            e.target.nextElementSibling.value = "";
+            updateInputConfig(e.target.nextElementSibling, false);
+          }
+        }
+        inputCount += 1;
+      } else if (value.length === 0 && e.key === "Backspace") {
+        if (inputCount === 0) {
+          updateInputConfig(e.target, false);
+          return;
+        }
+        finalInput = finalInput.substring(0, finalInput.length - 1);
+        updateInputConfig(e.target, true);
+        e.target.previousElementSibling.value = "";
+        updateInputConfig(e.target.previousElementSibling, false);
+        inputCount -= 1;
+      } else if (value.length > 1) {
+        e.target.value = value.split("")[0];
+      }
+
+      if (inputCount > 3) {
+        Search(finalInput);
+      }
     }
   });
 });
 
-window.addEventListener("keyup", (e) => {
+window.addEventListener("keydown", (e) => {
+  // keyup 대신 keydown으로 변경
+  console.log(e, inputCount);
   if (inputCount > 3) {
-    if (e.key == "Backspace" && isModal === false) {
+    if (e.key === "Backspace" && isModal === false) {
       finalInput = finalInput.substring(0, finalInput.length - 1);
       updateInputConfig(inputField.lastElementChild, false);
       inputField.lastElementChild.value = "";
@@ -78,17 +97,10 @@ function Search(digits) {
     (data) => {
       data.forEach((row) => {
         searchResults[row.no] = row;
-        var carnumber = row.car_number_full;
-        if (
-          row.car_number_full === undefined ||
-          row.car_number_full.length <= 4
-        ) {
-          carnumber = row.car_number_4digit;
-        }
         $(".searchResult").append(
           `
             <div class='row'>
-              <button class="carnumber" data-no="${row.no}">${row.name}/${carnumber}</button>
+              <button class="carnumber" data-no="${row.no}">${row.name}/${row.car_number_full}${row.car_number_4digit}</button>
             </div>
           `
         );
@@ -105,7 +117,7 @@ $(document).on("click", ".addnew", (event) => {
   $("#no").val("");
   $("#name").val("");
   $("#cellphone").val("");
-  $("#car_number_full").val(finalInput);
+  $("#car_number_full").val("");
   $("#car_number_4digit").val(finalInput);
   $("#car_type").val("");
   $("#part").val("");
@@ -177,10 +189,7 @@ $("#confirmButton").click(function (event) {
   var regdate = $("#regdate").val();
   var note = $("#note").val();
 
-  var carnumber = car_number_full;
-  if (car_number_full.length <= 4) {
-    carnumber = car_number_4digit;
-  }
+  var carnumber = car_number_full + car_number_4digit;
 
   cellphone = cellphone.replace(/-/g, "");
   var regex = /^\d{10,11}$/;
@@ -199,6 +208,13 @@ $("#confirmButton").click(function (event) {
   SendMessage(no, name, carnumber, cellphone);
 });
 
+$("#closeButton").click(function (event) {
+  $("#overlay").fadeOut();
+  $("#modal").removeClass("active").fadeOut();
+  isModal = false;
+  event.preventDefault();
+});
+
 //발송 버튼
 $("#saveButton").click(function (event) {
   event.preventDefault();
@@ -212,19 +228,16 @@ $("#saveButton").click(function (event) {
   var regdate = $("#regdate").val();
   var note = $("#note").val();
 
-  var carnumber = car_number_full;
-  if (car_number_full.length <= 4) {
-    carnumber = car_number_4digit;
-  }
+  var carnumber = car_number_full + car_number_4digit;
 
   cellphone = cellphone.replace(/-/g, "");
   var regex = /^\d{10,11}$/;
   if (regex.test(cellphone) === false) {
-    showToast("휴대폰번호를 확인해주세요", "");
+    showToast("휴대폰번호를 확인해주세요", "redflash");
     return;
   }
   if (carnumber.length < 4) {
-    showToast("차량번호를 확인해주세요");
+    showToast("차량번호를 확인해주세요", "redflash");
     return;
   }
 
@@ -298,7 +311,7 @@ function SendMessage(no, name, carnumber, cellphone) {
 }
 
 function showToast(message, color) {
-  console.log(color);
+  console.log("showToast:", color);
   $(".messageBox").text(message);
   $(".messageBox").addClass(color);
 

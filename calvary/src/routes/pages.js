@@ -14,22 +14,23 @@ router.get("*", (req, res, next) => {
 });
 
 router.get("/", function (req, res) {
-  //const user = req.session.user;
-  //console.log("/", user);
-  //if (user == null) {
-  //res.redirect("/login");
-  //} else {
-  res.render("search");
-  //}
+  const user = req.session.user;
+  console.log("/", user);
+  if (user == null) {
+    res.redirect("/login");
+  } else {
+    res.render("search");
+  }
 });
 
 router.get("/search", function (req, res) {
-  //const user = req.session.user;
-  //res.locals.user = user;
-  //console.log(user);
-  //if (user == null) {
-  //    res.redirect("/login");
-  //}
+  const user = req.session.user;
+  1;
+  res.locals.user = user;
+  console.log(user);
+  if (user == null) {
+    res.redirect("/login");
+  }
   res.render("search");
 });
 

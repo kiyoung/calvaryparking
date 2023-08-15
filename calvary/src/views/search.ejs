@@ -9,20 +9,18 @@
 <body>
   <div class="container">
     <div class="inputfield">
-      <input type="number" maxlength="1" class="input" disabled />
-      <input type="number" maxlength="1" class="input" disabled />
-      <input type="number" maxlength="1" class="input" disabled />
-      <input type="number" maxlength="1" class="input" disabled />
+      <input num="1" type="number" maxlength="1" class="input" disabled />
+      <input num="2" type="number" maxlength="1" class="input" disabled />
+      <input num="3" type="number" maxlength="1" class="input" disabled />
+      <input num="4" type="number" maxlength="1" class="input" disabled />
     </div>
     <div class="buttonContainer">
       <button id="init" onclick="init();">초기화</button>
     </div>
   </div>
-  <div>
-    <div class="searchResult">
-      <div class='row'>
-        <button class="addnew">신규등록</button>
-      </div>
+  <div class="searchResult">
+    <div class='row'>
+      <button class="addnew">신규등록</button>
     </div>
   </div>
   <div class="messageBox"></div>
@@ -41,11 +39,11 @@
         <input class="input-field" type="text" id="cellphone" placeholder="전화번호 필수" required>
       </div>
       <div class="input-group">
-        <label class="input-label" for="car_number_full">차량번호:</label>
-        <input class="input-field" type="text" id="car_number_full" placeholder="차량번호">
+        <label class="input-label" for="car_number_full">차앞번호</label>
+        <input class="input-field" type="text" id="car_number_full" placeholder="차량번호 앞자리">      
       </div>
       <div class="input-group">
-        <label class="input-label" for="car_number_4digit">4자리:</label>
+        <label class="input-label" for="car_number_4digit">차뒷번호</label>
         <input class="input-field" type="text" id="car_number_4digit" placeholder="차량번호4자리 필수" required>
       </div>
       <div class="input-group">
@@ -64,9 +62,10 @@
         <label class="input-label" for="note">비고</label>
         <input class="input-field" type="text" id="note" placeholder="비고">
       </div>
-      <button id="confirmButton">알림톡발송</button>
+      <button id="confirmButton">발송</button>
       <button id="saveButton">등록</button>
       <button id="deleteButton">삭제</button>
+      <button id="closeButton">닫기</button>
   </div>
   </form>
 </body>

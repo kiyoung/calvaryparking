@@ -1,32 +1,49 @@
-h1 {
-  font-family: helvetica;
+.login_container {
+  background-color: #f0f0f0;
+  border-radius: 15px;
+  box-shadow: 10px 10px 30px #626364, -10px -10px 30px #ffffff;
+  padding: 40px;
+  width: 90%;
+  max-width: 370px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+.form-title {
   text-align: center;
+  margin-bottom: 20px;
+  font-size: min(5vw, 25px);
 }
-
-.pin-code {
-  padding: 0;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
+.input-container {
+  margin-bottom: 10px;
+  display: inline;
 }
-
-.pin-code input {
+.input-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.input-field {
+  padding: 10px;
   border: none;
-  text-align: center;
-  width: 48px;
-  height: 48px;
-  font-size: 36px;
-  background-color: #f3f3f3;
-  margin-right: 5px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  width: 90%;
+  box-shadow: 5px 5px 10px #cbced1, -5px -5px 10px #ffffff;
 }
 
-.pin-code input:focus {
-  border: 1px solid #573d8b;
-  outline: none;
+.submit-button {
+  background-color: #4081f8;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+  box-shadow: 5px 5px 10px #cbced1, -5px -5px 10px #ffffff;
+  transition: all 0.3s ease-in-out;
 }
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.submit-button:hover {
+  background-color: #327ff1;
 }
