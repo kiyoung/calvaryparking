@@ -333,3 +333,8 @@ const startInput = () => {
 };
 
 window.onload = startInput();
+
+document.addEventListener("DOMContentLoaded", () => {
+  var page = document.getElementById("page");
+  page.classList.add("fade-in"); // 페이지 로드 시에 fade-in 클래스 추가
+});

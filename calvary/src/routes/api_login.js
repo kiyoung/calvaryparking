@@ -11,8 +11,9 @@ api_login.get("/logout", function (req, res) {
   res.redirect("login");
 });
 
-api_login.post("/createSession", (req, res) => {
+api_login.post("/login", (req, res) => {
   try {
+    res.locals.before = req.session.before;
     var password = req.body.password;
     if (password === "calpark3101") {
       req.session.user = {
@@ -21,6 +22,8 @@ api_login.post("/createSession", (req, res) => {
       res.status(200);
       res.redirect("/search");
     } else {
+      res.status(202);
+      res.render("login", { message: "로그인 실패" });
     }
   } catch (e) {
     //세션 생성 실패.

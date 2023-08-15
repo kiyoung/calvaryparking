@@ -4,14 +4,18 @@
   var referer = '<%= before %>';
 </script>
 
-<div class="login_container">
+<div class="login_container" id="login">
     <h1 class="form-title">암호를 입력하세요</h1>
-    <form action="/createSession" method="post">
+    <form action="/login" method="post">
         <div class="input-container">
             <input class="input-field" type="password" id="password" name="password" required>
         </div>
         <input class="submit-button" type="submit" value="Login">
+        <% if (typeof message !== 'undefined' && message !== null) { %>
+            <h3 class="text-danger mt-4"><%= message %></h3>
+        <% } else { %>
+        <% } %>
     </form>
 </div>
 <link href="../public/css/login.css" type="text/css" rel="stylesheet"></link>
-<script src="/public/js/login.js?v=1"></script>
+<script src="/public/js/login.js?v=2"></script>
