@@ -125,7 +125,7 @@ $(document).on("change", ".input-field", (event) => {
 $(document).on("click", ".addnew", (event) => {
   $("#no").val("");
   $("#name").val("");
-  $("#cellphone").val("");
+  $("#cellphone").val("010");
   $("#car_number_full").val("");
   $("#car_number_4digit").val(finalInput);
   $("#car_type").val("");
