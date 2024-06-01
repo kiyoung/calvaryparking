@@ -1,5 +1,4 @@
 const api_parking = require("express").Router();
-const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
@@ -80,7 +79,7 @@ api_parking.post("/sendmessage", async (req, res) => {
       var query =
         "INSERT INTO parking_log (`member_no`,`cellphone`, `date`, `sendtype`) " +
         `VALUES ('${no}','${receiver}',now(), '알림톡');`;
-      db.connection.query(query, (error, rows) => {});
+      db.connection.query(query, (error, rows) => { });
       res.send(response);
     }
   );

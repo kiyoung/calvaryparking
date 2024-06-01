@@ -11,49 +11,49 @@ vendorsRouter.use((req, res, next) => {
 });
 vendorsRouter.use(
   "/bootstrap",
-  express.static(path.join(__dirname, "../../node_modules/bootstrap/dist"))
+  express.static(path.join(__dirname, "../node_modules/bootstrap/dist"))
 );
 vendorsRouter.use(
   "/jquery",
-  express.static(path.join(__dirname, "../../node_modules/jquery/dist"))
+  express.static(path.join(__dirname, "../node_modules/jquery/dist"))
 );
 vendorsRouter.use(
   "/jqueryui",
-  express.static(path.join(__dirname, "../../node_modules/jqueryui"))
+  express.static(path.join(__dirname, "../node_modules/jqueryui"))
 );
 
 vendorsRouter.use(
   "/jquerytoast",
   express.static(
-    path.join(__dirname, "../../node_modules/jquery-toast-plugin/dist")
+    path.join(__dirname, "../node_modules/jquery-toast-plugin/dist")
   )
 );
 
 vendorsRouter.use(
   "/bootstrap-input-spinner",
   express.static(
-    path.join(__dirname, "../../node_modules/bootstrap-input-spinner/src")
+    path.join(__dirname, "../node_modules/bootstrap-input-spinner/src")
   )
 );
 
 vendorsRouter.use(
   "/fontawesome",
   express.static(
-    path.join(__dirname, "../../node_modules/@fortawesome/fontawesome-free/")
+    path.join(__dirname, "../node_modules/@fortawesome/fontawesome-free/")
   )
 );
 
 vendorsRouter.use(
   "/faceapi",
   express.static(
-    path.join(__dirname, "../../node_modules/face-api.js/dist/")
+    path.join(__dirname, "../node_modules/face-api.js/dist/")
   )
 );
 
 vendorsRouter.use(
   "/chartjs",
   express.static(
-    path.join(__dirname, "../../node_modules/chart.js/dist/")
+    path.join(__dirname, "../node_modules/chart.js/dist/")
   )
 );
 
