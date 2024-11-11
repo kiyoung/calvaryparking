@@ -25,13 +25,30 @@ router.get("/", function (req, res) {
 
 router.get("/search", function (req, res) {
   const user = req.session.user;
-  1;
   res.locals.user = user;
   console.log(user);
   if (user == null) {
     res.redirect("/login");
   }
   res.render("search");
+});
+
+router.get("/search-info", function (req, res) {
+  const user = req.session.user;
+  res.locals.user = user;
+  if (user == null) {
+    res.redirect("/login");
+  }
+  res.render("search_info");
+});
+
+router.get("/search-camera", function (req, res) {
+  const user = req.session.user;
+  res.locals.user = user;
+  if (user == null) {
+    res.redirect("/login");
+  }
+  res.render("search_camera");
 });
 
 module.exports = router;

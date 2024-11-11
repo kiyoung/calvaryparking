@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 #page {
   opacity: 0;
   transition: opacity 2s ease-in-out;
@@ -49,11 +50,26 @@ body {
   box-shadow: 0 45px 60px rgba(30, 22, 1, 0.3);
 }
 
+.searchResultCamera {
+  width: 80vw;
+  background: white;
+  position: sticky;
+  max-width: 40em;
+  background-color: #ffffff;
+  padding: 2em 2em;
+  margin-top: 550px;
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
+  border-radius: 0.8em;
+  box-shadow: 0 45px 60px rgba(30, 22, 1, 0.3);
+}
+
 .inputfield {
   width: 100%;
   display: flex;
   justify-content: space-around;
 }
+
 .input {
   width: 12vw;
   height: 12vw;
@@ -79,6 +95,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .input:disabled {
   color: #89888b;
 }
+
 .input:focus {
   border: 3px solid #ffb800;
 }
@@ -98,6 +115,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .show {
   display: block;
 }
+
 .hide {
   display: none;
 }
@@ -258,6 +276,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+
 #saveButton {
   display: inline-block;
   padding: 12px 18px;
@@ -267,6 +286,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+
 #deleteButton {
   display: none;
   padding: 12px 18px;
@@ -276,6 +296,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+
 #closeButton {
   position: absolute;
   top: 113%;
@@ -338,10 +359,12 @@ button {
 }
 
 @keyframes greenFlashAnimation {
+
   0%,
   100% {
     background-color: #ffffff;
   }
+
   50% {
     opacity: 1;
     display: block;
@@ -355,10 +378,12 @@ button {
 }
 
 @keyframes redFlashAnimation {
+
   0%,
   100% {
     background-color: #ffffff;
   }
+
   50% {
     opacity: 1;
     display: block;
@@ -369,4 +394,125 @@ button {
 .nameplate {
   font-weight: 700;
   color: #ffed9f;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+}
+
+.search-container input {
+  flex: 1;
+  height: 40px;
+  font-size: 16px;
+  padding: 0 15px;
+}
+
+.search-container button {
+  height: 40px;
+  padding: 0 20px;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.carnumber {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.car-info {
+  margin-top: 8px;
+  font-size: 20px;
+}
+
+.part {
+  margin-left: 10px;
+  font-size: 16px;
+  background-color: #4a90e2;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 16px;
+}
+
+.camera-container {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#video {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.camera-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.camera-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.camera-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* 기존 스타일에 추가 */
+#processCanvas {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px auto;
+  border: 1px solid #ddd;
+}
+
+.preview-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.preview-box {
+  text-align: center;
+}
+
+.preview-label {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
 }

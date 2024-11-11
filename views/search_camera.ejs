@@ -1,0 +1,86 @@
+<%-include('./Partials/Header.ejs')%>
+<%-include('./Partials/Navi.ejs')%>
+
+<head>
+  <link href="../public/css/search.css" type="text/css" rel="stylesheet">
+  <script src='https://cdn.jsdelivr.net/npm/tesseract.js@4.0.3/dist/tesseract.min.js'></script>
+  <script src="https://docs.opencv.org/4.7.0/opencv.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <div id="page">
+    <div class="container">
+      <div class="camera-container">
+        <div class="preview-container">
+          <div class="preview-box">
+            <video id="video" autoplay playsinline></video>
+            <div class="preview-label">카메라</div>
+          </div>
+          <div class="preview-box">
+            <canvas id="processCanvas"></canvas>
+            <div class="preview-label">처리된 이미지</div>
+          </div>
+        </div>
+        <canvas id="canvas" style="display: none;"></canvas>
+      </div>
+      <div class="inputfield">
+        <input num="1" type="number" maxlength="1" class="input" disabled />
+        <input num="2" type="number" maxlength="1" class="input" disabled />
+        <input num="3" type="number" maxlength="1" class="input" disabled />
+        <input num="4" type="number" maxlength="1" class="input" disabled />
+      </div>
+      <div class="buttonContainer">
+        <button id="init" onclick="init();">초기화</button>
+      </div>
+    </div>
+    <div class="searchResultCamera">
+      <div class='row'>
+        <button class="addnew">신규등록</button>
+      </div>
+    </div>
+    <div class="messageBox"></div>
+    <div id="overlay"></div>
+    <div id="modal">
+      <form method="post">
+        <input type="hidden" id="no">
+        <div class="input-group">
+          <label class="input-label" for="name">이름:</label>
+          <input class="input-field" type="text" id="name" placeholder="이름 없이 발송 가능">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="cellphone">전화번호:</label>
+          <input class="input-field" type="text" id="cellphone" placeholder="전화번호 필수" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="car_number_full">차앞번호</label>
+          <input class="input-field" type="text" id="car_number_full" placeholder="차량번호 앞자리">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="car_number_4digit">차뒷번호</label>
+          <input class="input-field" type="text" id="car_number_4digit" placeholder="차량번호4자리 필수" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="car_type">차종</label>
+          <input class="input-field" type="text" id="car_type" placeholder="차종">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="part">봉사부서</label>
+          <input class="input-field" type="text" id="part" placeholder="봉사부서">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="regdate">입력일자</label>
+          <input class="input-field" type="text" id="regdate" placeholder="수정/입력 시 자동입력" readonly>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="note">비고</label>
+          <input class="input-field" type="text" id="note" placeholder="비고">
+        </div>
+        <button id="confirmButton">발송</button>
+        <button id="saveButton">등록</button>
+        <button id="deleteButton">삭제</button>
+        <button id="closeButton">X</button>
+      </form>
+    </div>
+  </div>
+</body>
+<script src="/public/js/search_camera.js"></script>

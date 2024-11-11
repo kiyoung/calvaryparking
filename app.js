@@ -69,21 +69,15 @@ app.use("/vendors", vendorsRouter);
 
 //라우터 includes
 const routes = require("./routes/pages.js");
-const api = require("./routes/api.js");
+
 const api_login = require("./routes/api_login.js");
 const db = require("./routes/db.js");
 const api_parking = require("./routes/api_parking");
 
 app.use(db);
 app.use(routes);
-app.use(api);
 app.use(api_parking);
 app.use(api_login);
-
-// DB Connection 유지.
-setInterval(function () {
-  db.connection.query("SELECT 1");
-}, 5000);
 
 //Create Server
 const httpServer = http.createServer(app);

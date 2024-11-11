@@ -1,0 +1,72 @@
+<%-include('./Partials/Header.ejs')%>
+<%-include('./Partials/Navi.ejs')%>
+
+<head>
+  <link href="../public/css/search.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="page">
+    <div class="container">
+      <div class="search-container">
+        <input type="text" id="searchKeyword" class="form-control" placeholder="이름, 전화번호, 차량번호 검색">
+        <button id="searchButton" class="btn btn-primary">검색</button>
+      </div>
+      <div class="searchResult">
+        <div class='row'>
+          <button class="addnew">신규등록</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="overlay"></div>
+    <div id="modal">
+      <form method="post">
+        <input type="hidden" id="no">
+        <div class="input-group">
+          <label class="input-label" for="name">이름:</label>
+          <input type="text" class="input-field" id="name" name="name" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="cellphone">전화번호:</label>
+          <input type="text" class="input-field" id="cellphone" name="cellphone" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="car_number_full">차량번호:</label>
+          <input type="text" class="input-field" id="car_number_full" name="car_number_full" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="car_number_4digit">차량번호(4자리):</label>
+          <input type="text" class="input-field" id="car_number_4digit" name="car_number_4digit" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="car_type">차종:</label>
+          <input type="text" class="input-field" id="car_type" name="car_type">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="part">부서:</label>
+          <input type="text" class="input-field" id="part" name="part">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="note">비고:</label>
+          <input type="text" class="input-field" id="note" name="note">
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+          <button type="button" id="saveButton">저장</button>
+          <button type="button" id="deleteButton">삭제</button>
+        </div>
+      </form>
+      <button id="closeButton">×</button>
+    </div>
+  </div>
+
+  <div class="messageBox"></div>
+
+  <script src="/public/js/search_info.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      var page = document.getElementById("page");
+      page.classList.add("fade-in");
+    });
+  </script>
+</body>

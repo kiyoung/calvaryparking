@@ -1,8 +1,8 @@
 {
     "ignore": [
-        "src/public/*",
-        "src/views/*",
-        "src/upload/*"
+        "public/*",
+        "views/*",
+        "upload/*"
     ],
-    "exec": "babel-node src/app.js"
+    "exec": "babel-node app.js"
 }

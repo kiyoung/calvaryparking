@@ -85,48 +85,78 @@ api_parking.post("/sendmessage", async (req, res) => {
   );
 });
 
-api_parking.post("/search", (req, res) => {
-  var digits = req.body.digits;
-  var query = `select * from parking_members p WHERE p.car_number_4digit = '${digits}' ORDER BY regdate desc`;
-  console.log(query);
-  db.connection.query(query, (error, rows) => {
+api_parking.post("/search", async (req, res) => {
+  try {
+    var digits = req.body.digits;
+    var query = `select * from parking_members p WHERE p.car_number_4digit = '${digits}' ORDER BY regdate desc`;
+    console.log(query);
+    const rows = await db.connection.query(query);
     res.send(rows);
-  });
-});
-
-api_parking.post("/delete", (req, res) => {
-  var no = req.body.no;
-  var query = `DELETE FROM parking_members WHERE no=${no};`;
-  console.log(query);
-  db.connection.query(query, (error, rows) => {
-    res.send(rows);
-  });
-});
-
-api_parking.post("/modify", (req, res) => {
-  var data = req.body;
-  if (data.no > 0) {
-    //업데이트인 경우
-    var query = `UPDATE parking_members SET 
-    name='${data.name}', 
-    cellphone='${data.cellphone}', 
-    car_number_full='${data.car_number_full}', 
-    car_number_4digit='${data.car_number_4digit}', 
-    car_type='${data.car_type}', 
-    part='${data.part}', 
-    regdate=now(), 
-    note='${data.note}'
-    WHERE no=${data.no};`;
-  } else {
-    //insert인 경우
-    var query =
-      "INSERT INTO parking_members (`name`, `cellphone`, `car_number_full`, `car_number_4digit`, `car_type`, `part`, `regdate`, `note`) " +
-      `VALUES ('${data.name}', '${data.cellphone}', '${data.car_number_full}', '${data.car_number_4digit}', '${data.car_type}', '${data.part}', now(), '${data.note}');`;
+  } catch (error) {
+    console.error('Search error:', error);
+    res.status(500).send(error);
   }
-  console.log(query);
-  db.connection.query(query, (error, rows) => {
+});
+
+api_parking.post("/delete", async (req, res) => {
+  try {
+    var no = req.body.no;
+    var query = `DELETE FROM parking_members WHERE no=${no};`;
+    console.log(query);
+    const rows = await db.connection.query(query);
     res.send(rows);
-  });
+  } catch (error) {
+    console.error('Delete error:', error);
+    res.status(500).send(error);
+  }
+});
+
+api_parking.post("/modify", async (req, res) => {
+  try {
+    var data = req.body;
+    let query;
+    if (data.no > 0) {
+      query = `UPDATE parking_members SET 
+                name='${data.name}', 
+                cellphone='${data.cellphone}', 
+                car_number_full='${data.car_number_full}', 
+                car_number_4digit='${data.car_number_4digit}', 
+                car_type='${data.car_type}', 
+                part='${data.part}', 
+                regdate=now(), 
+                note='${data.note}'
+                WHERE no=${data.no};`;
+    } else {
+      query = "INSERT INTO parking_members (`name`, `cellphone`, `car_number_full`, `car_number_4digit`, `car_type`, `part`, `regdate`, `note`) " +
+        `VALUES ('${data.name}', '${data.cellphone}', '${data.car_number_full}', '${data.car_number_4digit}', '${data.car_type}', '${data.part}', now(), '${data.note}');`;
+    }
+    console.log(query);
+    const rows = await db.connection.query(query);
+    res.send(rows);
+  } catch (error) {
+    console.error('Modify error:', error);
+    res.status(500).send(error);
+  }
+});
+
+api_parking.post("/search-by-info", async (req, res) => {
+  try {
+    const { keyword } = req.body;
+    let query = `
+            SELECT * FROM parking_members 
+            WHERE name LIKE '%${keyword}%' 
+            OR cellphone LIKE '%${keyword}%'
+            OR car_number_full LIKE '%${keyword}%'
+            OR car_number_4digit LIKE '%${keyword}%'
+            ORDER BY regdate DESC
+        `;
+
+    const rows = await db.connection.query(query);
+    res.send(rows);
+  } catch (error) {
+    console.error('Search by info error:', error);
+    res.status(500).send(error);
+  }
 });
 
 module.exports = api_parking;
